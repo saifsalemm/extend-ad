@@ -476,7 +476,9 @@ body {
   --primary-shade-1: #6a994e;
   --primary-shade-2: #a7c957;
   --primary-black: #333;
+  --primary-black-2: #444;
   --grey-color: #f2e8cf;
+  --grey-color-2: #fcfbf4;
   --warning-color: #efbc41;
 }
 
@@ -503,4 +505,17 @@ body {
   justify-content: center;
   align-items: center;
   height: 80vh;
+}
+
+body {
+  background-color: var(--grey-color-2);
+}
+
+
+.error-msg {
+  color: red;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  justify-self: center;
 }
