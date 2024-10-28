@@ -1,0 +1,20 @@
+.container {
+  padding: 2rem 0;
+  width: 70%;
+  justify-self: center;
+}
+
+.search {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 850px) {
+  .container {
+    width: 90%;
+  }
+
+  .search {
+    flex-direction: column;
+  }
+}
