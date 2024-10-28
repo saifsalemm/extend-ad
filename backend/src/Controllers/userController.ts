@@ -26,7 +26,7 @@ export const createUser = async (
   res: Response
 ): Promise<void> => {
   try {
-    const { first_name, last_name, email, password } = req.body;
+    const { first_name, last_name, email, password, role } = req.body;
 
     if (!first_name || !last_name || !email || !password) {
       res.status(400).json({ message: "All fields are required" });
@@ -46,7 +46,7 @@ export const createUser = async (
     user.last_name = last_name;
     user.email = email;
     user.password = hashedPassword;
-    user.role = Roles.CUSTOMER;
+    user.role = role ?? Roles.CUSTOMER;
 
     await user.save();
 
@@ -60,12 +60,10 @@ export const createUser = async (
 
     const token = createToken(userObj);
 
-    res
-      .status(201)
-      .json({
-        message: "User created successfully",
-        user: { ...userObj, token },
-      });
+    res.status(201).json({
+      message: "User created successfully",
+      user: { ...userObj, token },
+    });
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
   } finally {
@@ -126,7 +124,15 @@ export const currentUser = async (
 
     const token = createToken(user);
 
-    res.status(200).json({ token });
+    const useObj = {
+      id: user.id,
+      email: user.email,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      role: user.role,
+    };
+
+    res.status(200).json({ ...useObj, token });
   } catch (error) {
     res.status(401).json({ message: "Token not found or not valid" });
   }
