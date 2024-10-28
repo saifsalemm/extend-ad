@@ -27,6 +27,14 @@ const CataloguePage = () => {
     return <Spinner />;
   }
 
+  if (products?.length === 0) {
+    return (
+      <div className={styles.container}>
+        <h1 className={styles.noProducts}>No products found</h1>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.search}>
