@@ -1,24 +1,17 @@
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
+import { commentRouter } from "./Routes/commentRoutes.js";
+import { productRouter } from "./Routes/productRoutes.js";
+import { reviewRouter } from "./Routes/reviewRoutes.js";
 import { userRouter } from "./Routes/userRoutes.js";
 
 dotenv.config();
 
 export const app = express();
 
-const getDomain = (domain: string): string => {
-  const allowedOrigins = ["http://localhost:5000"];
-
-  return allowedOrigins.includes(domain) ? domain : allowedOrigins[0];
-};
-
-app.use((req, res, next) => {
-  const domain = req.get("origin") ?? "https://beta.codebites.com";
-
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header("Access-Control-Expose-Headers", "set-cookie");
-  res.header("Access-Control-Allow-Origin", getDomain(domain));
+app.use((_, res, next) => {
+  res.header("Access-Control-Allow-Origin", "http://localhost:5173");
   res.header(
     "Access-Control-Allow-Methods",
     "GET, POST, PUT, DELETE, OPTIONS, PATCH"
@@ -30,12 +23,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req, _res, next) => {
-  const domain = req.get("origin") ?? "https://beta.codebites.com";
-
+app.use((_, _res, next) => {
   cors({
-    origin: getDomain(domain),
-    credentials: true,
+    origin: "http://localhost:5173",
   });
   next();
 });
@@ -43,4 +33,6 @@ app.use((req, _res, next) => {
 app.use(express.json());
 
 app.use("/v1/users", userRouter);
-app.use("/v1/products", userRouter);
+app.use("/v1/products", productRouter);
+app.use("/v1/comments", commentRouter);
+app.use("/v1/reviews", reviewRouter);
