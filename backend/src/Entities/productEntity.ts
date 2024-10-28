@@ -8,11 +8,11 @@ export class Products extends BaseEntity {
   @Column()
   name: string;
 
-  @Column("decimal")
+  @Column()
   price: number;
 
-  @Column()
-  creation_date: number;
+  @Column({ default: new Date() })
+  creation_date: Date;
 
   @Column({ nullable: true })
   description: string;
