@@ -1,0 +1,33 @@
+.comment {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 1rem 1rem 0 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--primary-shade-2);
+}
+
+.comment:first-child{
+  padding-top: 0;
+  border-top: none;
+}
+
+.comment:last-child {
+  margin-bottom: 1rem;
+}
+
+.comment h2 {
+  font-size: 1.5rem;
+  color: var(--secondary-color);
+}
+
+.comment p {
+  margin: 1rem 1rem 0 1rem;
+  font-weight: bold;
+  font-size: 1rem;
+  color: var(--primary-black);
+}
+
+.commentsContainer {
+    padding: 0 1rem;
+}
