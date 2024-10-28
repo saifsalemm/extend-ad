@@ -1,0 +1,13 @@
+{
+    "name": "extend-ad-ecommerce",
+    "version": "1.0.0",
+    "private": true,
+    "workspaces": [
+      "frontend",
+      "backend"
+    ],
+    "scripts": {
+      "install:all": "npm install --workspaces"
+    }
+  }
+  
